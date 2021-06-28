@@ -1,0 +1,41 @@
+﻿@model DynaxInvoice.BO.LoginViewModel
+@{
+    ViewBag.Title = "Dynax Solutions Pvt. Ltd.";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<div class="homecontainer">
+    <h3>Welcome to Booking Master</h3>
+    <div class="login bg-light">
+        <center>
+            <h3><i class="fas fa-users"></i> User Login</h3>
+        </center>
+        <hr />
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fas fa-user"></i></div>
+                        </div>
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Username", required = "required" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fas fa-lock"></i></div>
+                        </div>
+                         @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password", required = "required" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-info m-b-20 btn-block text-uppercase waves-effect waves-light" type="submit">
+                        Log In <i class="ion-log-in"></i>
+                    </button>
+                </div>
+
+        }
+    </div>
+</div>
+

@@ -1,0 +1,272 @@
+﻿@model DynaxInvoice.BO.DynaxDealer
+@{
+    ViewBag.Title = "Dynax Solutions Pvt. Ltd.";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="homecontainer">
+    <h3>Welcome to Booking Master</h3>
+
+    <div class="login2 bg-light">
+        <center>
+            <h3><i class="fas fa-globe"></i> Dealer Details</h3>
+        </center>
+        <hr />
+        @using (Html.BeginForm("Create", "DDealer", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.ZoneId);
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="CompanyName" class="font-weight-bold">Dealer Name</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="far fa-building"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.DealerName, new { @class = "form-control", placeholder = "Dealer Name" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Address1" class="font-weight-bold">Address1</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-address-card"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.DealerAddress1, new { @class = "form-control", placeholder = "Address1", required = "required" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Address1" class="font-weight-bold">Address2</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-address-card"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.DealerAddress2, new { @class = "form-control", placeholder = "Address2", required = "required" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="City" class="font-weight-bold">City</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-address-card"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.City, new { @class = "form-control", placeholder = "City", required = "required" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="ZoneId" class="font-weight-bold">State</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-globe"></i></div>
+                            </div>
+                            @Html.DropDownListFor(m => m.StateId, new SelectList(ViewBag.stList, "Id", "StateName", "0"),
+                            "Select State", new { @class = "form-control", required = "required" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Pincode" class="font-weight-bold">Pincode</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-address-card"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", placeholder = "Pincode", required = "required", maxlength = "6", minlength = "6" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="font-weight-bold">Zone</label>
+                    <div class="alert alert-info">
+                        <div class="row">
+                            @{
+                                var zoneList = ViewBag.zoneList;
+                                if (zoneList != null)
+                                {
+                                    foreach (var zone in zoneList)
+                                    {
+                                        string strZoneId = ViewBag.DealerZone;
+                                        string[] strId = strZoneId.Split(',');
+                                        for (int i = 0; i < strId.Length; i++)
+                                        {
+                                            if (int.Parse(strId[i]) == zone.Id)
+                                            {
+                                                <div class="col-md-3">
+                                                    <input type="checkbox" id="@zone.Id" class="custom-checkbox" value="@zone.Id" checked="checked" />
+                                                    <label for="Status">@zone.ZoneName</label>
+                                                </div>
+                                            }                                          
+                                        }
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="ContactPerson" class="font-weight-bold">Contact Person</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="far fa-user"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.ContactPerson, new { @class = "form-control", placeholder = "Contact Person", required = "required" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="ContactMobileNo" class="font-weight-bold">Contact Person's Mobile</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-mobile-alt"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", placeholder = "Contact Mobile No.", required = "required", maxlength = "10", minlength = "10" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="Email" class="font-weight-bold">Email</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-envelope-square"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.EmailId, new { @class = "form-control", placeholder = "Email", required = "required" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="Email" class="font-weight-bold">GSTIN</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-envelope-square"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.GSTNo, new { @class = "form-control", placeholder = "Email", required = "required" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="text-center">Bank Details</h4>
+                    <hr />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="Email" class="font-weight-bold">Account Name</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-envelope-square"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.AccountName, new { @class = "form-control", placeholder = "Account Name", required = "required" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="Email" class="font-weight-bold">Account No</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-envelope-square"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.AccountNo, new { @class = "form-control", placeholder = "Account No", required = "required" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="BankName" class="font-weight-bold">Bank Name</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-money-check-alt"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", placeholder = "Bank Name", required = "required" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="BankName" class="font-weight-bold">IFSC Code</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-money-check-alt"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", placeholder = "IFSC Code", required = "required" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="JoinDate" class="font-weight-bold">Join Date</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-money-check-alt"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.JoinDate, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="EndDate" class="font-weight-bold">End Date</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-money-check-alt"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="col-xs-12 text-center" style="margin-top:20px;">
+                            @Html.CheckBox("Status", true, new { @class = "with-font" })
+                            <label for="Status">Active</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <a class="btn btn-info m-b-20 btn-block text-uppercase waves-effect waves-light" href="~/ddealer">
+                            <i class="fas fa-plus-square"></i> BACK TO DEALER LIST
+                        </a>
+                    </div>
+                </div>
+            </div>
+           
+        }
+    </div>
+</div>
+
+<script>
+
+    $(function () {
+        $('input, select, textarea,checkbox').attr('disabled', 'disabled');
+    });
+
+</script>

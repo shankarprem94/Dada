@@ -1,0 +1,5 @@
+D:\current-project\DynaxInvoice\DynaxInvoice.Utility\bin\Release\DynaxInvoice.Utility.dll
+D:\current-project\DynaxInvoice\DynaxInvoice.Utility\bin\Release\DynaxInvoice.Utility.pdb
+D:\current-project\DynaxInvoice\DynaxInvoice.Utility\obj\Release\DynaxInvoice.Utility.csprojAssemblyReference.cache
+D:\current-project\DynaxInvoice\DynaxInvoice.Utility\obj\Release\DynaxInvoice.Utility.dll
+D:\current-project\DynaxInvoice\DynaxInvoice.Utility\obj\Release\DynaxInvoice.Utility.pdb

@@ -1,0 +1,133 @@
+﻿@model DynaxInvoice.BO.DynaxUser
+@{
+    ViewBag.Title = "Dynax Solutions Pvt. Ltd.";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="homecontainer">
+    <h3>Welcome to Booking Master</h3>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        @{
+            if (ViewBag.Status != null)
+            {
+                if (ViewBag.Status == 0)
+                {
+                    <div class="alert alert-success">
+                        One User added successfully.
+                    </div>                   
+                }
+                else if (ViewBag.Status == 1)
+                {
+                    <div class="alert alert-danger">
+                        Something went wrong !! Please try after sometime.
+                    </div>
+                }                
+            }
+        }
+    </div>
+    <div class="login bg-light">
+        <center>
+            <h3><i class="fas fa-users"></i> Add New User</h3>
+        </center>
+        <hr />
+        @using (Html.BeginForm("Create", "Duser", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fas fa-user"></i></div>
+                    </div>
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Username", required = "required" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fas fa-lock"></i></div>
+                    </div>
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password", required = "required" })
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+       <div class="row">
+           <div class="col-md-12">
+               <div class="form-group">
+                   <div class="input-group">
+                       <div class="input-group-prepend">
+                           <div class="input-group-text"><i class="fas fa-user"></i></div>
+                       </div>
+                       @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", placeholder = "Full Name", required = "required" })
+                   </div>
+               </div>
+           </div>
+       </div>    
+       <div class="row">
+           <div class="col-md-6">
+               <div class="form-group">
+                   <div class="input-group">
+                       <div class="input-group-prepend">
+                           <div class="input-group-text"><i class="fas fa-mobile-alt"></i></div>
+                       </div>
+                       @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", placeholder = "10 digit Mobile no", maxlength = 10, required = "required" })
+                   </div>
+               </div>
+           </div>
+           <div class="col-md-6">
+               <div class="form-group">
+                   <div class="input-group">
+                       <div class="input-group-prepend">
+                           <div class="input-group-text"><i class="far fa-envelope"></i></div>
+                       </div>
+                       @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email Id", required = "required" })
+                   </div>
+               </div>
+           </div>
+       </div>   
+       <div class="row">
+           <div class="col-md-7">
+               <div class="form-group">
+                   <div class="col-xs-12">
+                       @Html.RadioButtonFor(m => m.UserType, 3, new { required = "required" })
+                       <label>End User</label>
+                       @Html.RadioButtonFor(m => m.UserType, 2)
+                       <label>Dealer Admin</label>
+                       @Html.RadioButtonFor(m => m.UserType, 1)
+                       <label>Super Admin</label>
+                   </div>
+               </div>
+           </div>
+           <div class="col-md-5">
+               <div class="form-group">
+                   <div class="input-group">
+                       <div class="input-group-prepend">
+                           <div class="input-group-text"><i class="fas fa-globe"></i></div>
+                       </div>
+                       @Html.DropDownListFor(m => m.DealerId, new SelectList(ViewBag.lstDealer, "Id", "DealerName", "0"),
+                       "Select Dealer", new { @class = "form-control", required = "required" })
+                   </div>
+               </div>
+           </div>
+       </div>       
+            
+          
+            <div class="form-group">
+                <div class="col-xs-12">
+                    @Html.CheckBox("Status", true, new { @class = "with-font" })
+                    <label for="Status">Active</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-info m-b-20 btn-block text-uppercase waves-effect waves-light" type="submit">
+                    <i class="fas fa-plus-square"></i> SAVE
+                </button>
+            </div>
+        }
+    </div>
+</div>

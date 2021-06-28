@@ -1,0 +1,162 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/fontawesome.min.css" rel="stylesheet" />
+    <link href="~/Content/fontawesome-all.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/site.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="~/dashboard">Booking Master</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            @{
+                var role = DynaxInvoice.Web.Models.ClaimsExtensions.GetRole(this.User);
+                var name = DynaxInvoice.Web.Models.ClaimsExtensions.GetName(this.User);
+
+                if (role != null)
+                {
+                    if (role == "Super Admin")
+                    {
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item mx-1 dropdown">
+                                <a class="nav-link dropdown-toggle" id="templates-dropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Invoice</a>
+                                <div class="dropdown-menu" aria-labelledby="templates-dropdown">
+                                    <a class="dropdown-item" href="~/dinvoice/create">Add Invoice</a>
+                                    <a class="dropdown-item" href="~/dinvoice">View/Edit Invoice </a>
+                                    <div class="dropdown-divider"></div>                                   
+                                    <a class="dropdown-item" href="~/dinvoice/paymentdetails">Payment History </a>
+                                </div>
+                            </li>
+                            <li class="nav-item mx-1 dropdown">
+                                <a class="nav-link dropdown-toggle" id="templates-dropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Customer/Hotel</a>
+                                <div class="dropdown-menu" aria-labelledby="templates-dropdown">
+                                    <a class="dropdown-item" href="~/dcustomer/create">Add Customer</a>
+                                    <a class="dropdown-item" href="~/dcustomer">View/Edit Customer</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="~/dhotels/create">Add Hotel</a>
+                                    <a class="dropdown-item" href="~/dhotels">View/Edit Hotel </a>
+                                </div>
+                            </li>
+                            <li class="nav-item mx-1 dropdown">
+                                <a class="nav-link dropdown-toggle" id="templates-dropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Package/SMS</a>
+                                <div class="dropdown-menu" aria-labelledby="templates-dropdown">
+                                    <a class="dropdown-item" href="~/dpackages/create">Add Package</a>
+                                    <a class="dropdown-item" href="~/dpackages">View/Edit Package </a>
+                                </div>
+                            </li>
+                            <li class="nav-item mx-1 dropdown">
+                                <a class="nav-link dropdown-toggle" id="dealer-dropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dealer/Zone</a>
+                                <div class="dropdown-menu" aria-labelledby="dealer-dropdown">
+                                    <a class="dropdown-item" href="~/dzone/create">Add Zone</a>
+                                    <a class="dropdown-item" href="~/dzone">View Zone</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="~/ddealer/create">Add Dealer</a>
+                                    <a class="dropdown-item" href="~/ddealer/uploadlogo">Add Dealer's Logo</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="~/ddealer">View Dealer</a>
+                                </div>
+                            </li>
+
+                            <li class="nav-item mx-1 dropdown">
+                                <a class="nav-link dropdown-toggle" id="pages-dropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">State/Facility</a>
+                                <div class="dropdown-menu" aria-labelledby="pages-dropdown">
+                                    <a class="dropdown-item" href="~/dbstate/create">Add New State</a>
+                                    <a class="dropdown-item" href="~/dbstate">View State</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="~/dfacility/create">Add Facility</a>
+                                    <a class="dropdown-item" href="~/dfacility">View Facility</a>
+                                </div>
+                            </li>
+
+                            <li class="nav-item mx-1 dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Welcome @name
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navUser">
+                                    <a class="dropdown-item" href="~/duser/create">Add User</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="~/duser">User List</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="~/duser/changepassword">Change Password</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="~/logout">Logout</a>
+                                </div>
+                            </li>
+                        </ul>
+                    }
+                    else if (role == "Dealer Admin" || role == "End-user")
+                    {
+        <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+            <li class="nav-item mx-1 dropdown">
+                <a class="nav-link dropdown-toggle" id="templates-dropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Invoice</a>
+                <div class="dropdown-menu" aria-labelledby="templates-dropdown">
+                    <a class="dropdown-item" href="~/dinvoice/create">Add Invoice</a>
+                    <a class="dropdown-item" href="~/dinvoice">View/Edit Invoice </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="~/dinvoice/paymentdetails">View/Edit Payment </a>
+                </div>
+            </li>
+            <li class="nav-item mx-1 dropdown">
+                <a class="nav-link dropdown-toggle" id="templates-dropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Customer/Hotel</a>
+                <div class="dropdown-menu" aria-labelledby="templates-dropdown">
+                    <a class="dropdown-item" href="~/dcustomer/create">Add Customer</a>
+                    <a class="dropdown-item" href="~/dcustomer">View/Edit Customer</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="~/dhotels/create">Add Hotel</a>
+                    <a class="dropdown-item" href="~/dhotels">View/Edit Hotel </a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Welcome @name
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
+                    <a class="dropdown-item" href="~/duser/changepassword">Change Password</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="~/logout">Logout</a>
+                </div>
+            </li>
+        </ul>
+                    }
+                }
+            }
+        </div>
+    </nav>
+    <div class="container">
+        @RenderBody()
+    </div>
+    <footer>
+        <hr />
+        <center>&copy;  @DateTime.Today.Year All right reserved to Dynax Solutions Pvt. Ltd.</center><br />
+    </footer>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/popper.min.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function ($) {
+
+            $('#InvoiceDate').datepicker({
+                format: 'dd/mm/yyyy',
+            }).datepicker("setDate", 'now');
+
+            $('#ActivationDate').datepicker({
+                format: 'dd/mm/yyyy',
+            }).datepicker("setDate", 'now');
+        });
+
+    </script>
+</body>
+</html>

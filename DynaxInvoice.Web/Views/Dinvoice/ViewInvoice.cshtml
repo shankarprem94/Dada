@@ -1,0 +1,42 @@
+﻿@model DynaxInvoice.BO.InvoiceViewModel
+@{
+    ViewBag.Title = "Dynax Solutions Pvt. Ltd.";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="homecontainer">
+    <h3>Welcome to Booking Master</h3>
+    
+    <div class="login3 bg-light">
+        <center>
+            <h3><i class="fas fa-globe"></i> View Invoice </h3>
+        </center>
+        <hr />
+        @{
+            string strContent = ViewBag.Invoice;
+
+        }
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Raw(strContent)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <a class="btn btn-info m-b-20 btn-block text-uppercase waves-effect waves-light" href="~/dinvoice">
+                        <i class="fas fa-plus-square"></i> BACK TO DEALER LIST
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">                  
+                    <a class="btn btn-info m-b-20 btn-block text-uppercase waves-effect waves-light" href="~/dinvoice/download/@ViewBag.Id">
+                        <i class="fas fa-plus-square"></i> DOWNLOAD INVOICE
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

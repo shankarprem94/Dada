@@ -1,0 +1,247 @@
+﻿@import url(//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css);
+
+input[type=radio].with-font,
+input[type=checkbox].with-font {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+    input[type=radio].with-font ~ label:before,
+    input[type=checkbox].with-font ~ label:before {
+        font-family: FontAwesome;
+        display: inline-block;
+        content: "\f1db";
+        letter-spacing: 10px;
+        font-size: 1.2em;
+        color: #535353;
+        width: 1.4em;
+    }
+
+    input[type=radio].with-font:checked ~ label:before,
+    input[type=checkbox].with-font:checked ~ label:before {
+        content: "\f00c";
+        font-size: 1.2em;
+        color: darkgreen;
+        letter-spacing: 5px;
+    }
+
+    input[type=checkbox].with-font ~ label:before {
+        content: "\f096";
+    }
+
+    input[type=checkbox].with-font:checked ~ label:before {
+        content: "\f046";
+        color: darkgreen;
+    }
+
+    input[type=radio].with-font:focus ~ label:before,
+    input[type=checkbox].with-font:focus ~ label:before,
+    input[type=radio].with-font:focus ~ label,
+    input[type=checkbox].with-font:focus ~ label {
+        color: green;
+    }
+    /*.with-font1*/
+input[type=radio].with-font1,
+input[type=checkbox].with-font1 {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+    input[type=radio].with-font1 ~ label:before,
+    input[type=checkbox].with-font1 ~ label:before {
+        font-family: FontAwesome;
+        display: inline-block;
+        content: "\f1db";
+        letter-spacing: 10px;
+        font-size: 1.2em;
+        color: #535353;
+        width: 1.4em;
+    }
+
+    input[type=radio].with-font1:checked ~ label:before,
+    input[type=checkbox].with-font1:checked ~ label:before {
+        content: "\f00c";
+        font-size: 1.2em;
+        color: darkgreen;
+        letter-spacing: 5px;
+    }
+
+    input[type=checkbox].with-font1 ~ label:before {
+        content: "\f096";
+    }
+
+    input[type=checkbox].with-font1:checked ~ label:before {
+        content: "\f046";
+        color: darkgreen;
+    }
+
+    input[type=radio].with-font1:focus ~ label:before,
+    input[type=checkbox].with-font1:focus ~ label:before,
+    input[type=radio].with-font1:focus ~ label,
+    input[type=checkbox].with-font1:focus ~ label {
+        color: green;
+    }
+
+.homecontainer1 {
+    min-height: 475px;
+    margin-top: 80px;
+}
+.homecontainer {
+    min-height: 500px;
+    margin-top: 80px;
+}
+footer {
+    background-color: #343a40;
+    padding: 0 10px 0 0;
+    color: #fff;
+    font-size: 11px;
+}
+
+.login {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 50px 30%;
+}
+.login1 {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 30px 10%;
+}
+.login2 {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 50px 20%;
+}
+.login3 {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 50px 28%;
+}
+a {
+    color: #007bff;
+}
+.tbContainer{margin-top:20px; border:1px solid #ccc; border-radius:5px; padding:10px 0;}
+
+@media (min-width: 576px) {
+    .container {
+        max-width: 540px;
+    }
+    .login {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 50px 5%;
+    }
+    .login1 {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 50px 3%;
+    }
+    .login2 {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 50px 10%;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+    .login {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 50px 10%;
+    }
+    .login1 {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 50px 5%;
+    }
+    .login2 {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 50px 20%;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+    .login {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 50px 20%;
+    }
+    .login1 {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 50px 10%;
+    }
+    .login2 {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 50px 20%;
+    }
+    .login3 {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 50px 18%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 99%;
+    }
+    .login {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 50px 25%;
+    }
+    .login1 {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 30px 5%;
+    }
+    .login2 {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 30px 10%;
+    }
+    .login3 {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 50px 22%;
+    }
+}

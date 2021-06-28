@@ -1,0 +1,61 @@
+﻿
+@{
+     ViewBag.Title = "Dynax Solutions Pvt. Ltd.";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<script type="text/javascript">
+
+    function LinkMenu(param) {
+        return "<a href=\"Dzone/edit/" + param + "\"><i class=\"fas fa-edit\"></i></a>";
+    }
+    function showCheckBox(param) {
+        var cnt = 1;
+        var id = "Chk" + cnt;
+        if (param == true) {
+            return "<input type=\"checkbox\" checked=\"checked\" id=\"" + id + "\" disabled=\"disabled\" />";
+        }
+        else {
+            return "<input type=\"checkbox\" id=\"" + id + "\" disabled=\"disabled\"  />";
+        }
+        cnt++;
+    }
+   
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "searching": true,
+            "ordering": true,
+            "pagingType": "full_numbers",
+            "ajax": "Dzone/GetAllZone",
+            "columns": [
+                { "data": "id" },
+                { "data": "zoneName" },           
+                { "data": "stateName" },           
+                { "data": "status", "render": function (data) { return showCheckBox(data) } },
+                { "data": "id", "render": function (data) { return LinkMenu(data) } }
+            ]
+        });
+    });
+
+</script>
+<div style="margin-top:80px; min-height:500px;">
+    <h3><i class="far fa-address-book"></i> Zone List</h3>
+    <div class="tbContainer">
+        <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+                <a href="~/dzone/create" class="btn btn-primary">Add New Zone</a>
+            </div>
+        </div>
+        <table id="example" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Zone</th>
+                    <th>State</th>
+                    <th>Staus</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>

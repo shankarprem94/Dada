@@ -1,0 +1,126 @@
+﻿@model DynaxInvoice.BO.DynaxPayment
+@{
+    ViewBag.Title = "Dynax Solutions Pvt. Ltd.";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="homecontainer">
+    <h3>Welcome to Booking Master</h3>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        @{
+            if (ViewBag.Status != null)
+            {
+                if (ViewBag.Status == 0)
+                {
+                    <div class="alert alert-success">
+                        Invoice updated successfully.
+                    </div>
+                }
+                else if (ViewBag.Status > 0)
+                {
+                    <div class="alert alert-danger">
+                        Something went wrong !! Please try after sometime.
+                    </div>
+                }
+            }
+        }
+    </div>
+    <div class="login2 bg-light">
+        <center>
+            <h3><i class="fab fa-cc-amazon-pay"></i> Payment </h3>
+        </center>
+        <hr />
+        @using (Html.BeginForm("Payment", "dinvoice", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()    
+            @Html.HiddenFor(m=>m.InvoiceId)
+
+            <div class="row">               
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="CompanyName" class="font-weight-bold">Payment Mode</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="far fa-building"></i></div>
+                            </div>
+                            @Html.DropDownListFor(m => m.PaymentMode, new List<SelectListItem>
+                                                   {
+                                               new SelectListItem{ Text="Payment Mode", Value = "" },
+                                                        new SelectListItem{ Text="CASH", Value = "CASH" },
+                                                        new SelectListItem{ Text="CHEQUE", Value = "CHEQUE" },
+                                                         new SelectListItem{ Text="NEFT", Value = "NEFT" }
+                                                   },
+                                               new { @class = "form-control", placeholder = "Payment Mode", required = "required" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="ZoneId" class="font-weight-bold">Check Number</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-globe"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.ChequeNumber, new { @class = "form-control", placeholder = "Check Number", maxlength="6" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="CompanyName" class="font-weight-bold">Check Date</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="far fa-building"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.ChequeDate, new { @class = "form-control", placeholder = "Check Date", required = "required" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="CompanyName" class="font-weight-bold">Bank Name</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="far fa-building"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", placeholder = "Bank Name", required = "required" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="CompanyName" class="font-weight-bold">Paid Amount</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="far fa-building"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.PaidAmount, new { @class = "form-control", placeholder = "Paid Amount", @readonly = "readonly" })
+                        </div>
+                    </div>
+                </div>                
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="CompanyName" class="font-weight-bold">Transaction Id</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="far fa-building"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.TransactionId, new { @class = "form-control", placeholder = "Transaction Id" })
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <button class="btn btn-info m-b-20 btn-block text-uppercase waves-effect waves-light" type="submit">
+                            <i class="fas fa-plus-square"></i> SAVE PAYMENT
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

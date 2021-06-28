@@ -1,0 +1,465 @@
+﻿@model DynaxInvoice.BO.InvoiceViewModel
+@{
+    ViewBag.Title = "Dynax Solutions Pvt. Ltd.";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="homecontainer">
+    <h3>Welcome to Booking Master</h3>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        @{
+            if (ViewBag.Status != null)
+            {
+                if (ViewBag.Status > 0)
+                {
+                    <div class="alert alert-success">
+                        Invoice added successfully.
+                    </div>
+                }
+                else if (ViewBag.Status == 0)
+                {
+                    <div class="alert alert-danger">
+                        Something went wrong !! Please try after sometime.
+                    </div>
+                }
+            }
+        }
+    </div>
+    <div class="login2 bg-light">
+        <center>
+            <h3><i class="fas fa-globe"></i> Add Invoice </h3>
+        </center>
+        <hr />
+        @using (Html.BeginForm("Create", "dinvoice", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.CustomerPackage);
+            @Html.Hidden("MaxDiscount");
+            @Html.Hidden("PackageName");
+            @Html.HiddenFor(m => m.HotelId);
+            @Html.HiddenFor(m => m.UserId);
+            // @Html.HiddenFor(m=>m.ZoneId);
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="City" class="font-weight-bold">Customer</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-address-card"></i></div>
+                            </div>
+                            @Html.DropDownListFor(m => m.CustomerId, new SelectList(ViewBag.cstList, "Id", "CompanyName", "0"),
+                            "Select Customer", new { @class = "form-control", required = "required" })
+                        </div>
+                    </div>
+                </div>
+                @* <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="ZoneId" class="font-weight-bold">Zone</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-globe"></i></div>
+                                </div>
+                               @Html.DropDownListFor(m => m.ZoneId, new SelectList(ViewBag.ZoneList, "Id", "ZoneName", "0"),
+                                    "Select Zone", new { @class = "form-control", required = "required" })
+                        <select id="Zone" class="form-control" required="required">
+                            <option value="">Select Zone</option>
+                        </select>
+                    </div>
+                                    </div>
+                                </div>*@
+                @*<div class="col-md-4">
+                        <div class="form-group">
+                            <label for="ZoneId" class="font-weight-bold">Zone</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-globe"></i></div>
+                                </div>
+                                @Html.DropDownListFor(m => m.UserId, new SelectList(ViewBag.UserList, "UserId", "UserName", "0"),
+                                "Select Salesman", new { @class = "form-control", required = "required" })
+                            </div>
+                        </div>
+                    </div>*@
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <label class="font-weight-bold">Hotel</label>
+                        <div class="alert alert-success">
+                            <div class="row" id="dvHotels">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="PackageId" class="font-weight-bold">Package</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-globe"></i></div>
+                            </div>
+                            @Html.DropDownListFor(m => m.PackageId, new SelectList(ViewBag.PackageList, "Id", "PackageName", "0"),
+                            "Select Package", new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="PackageAmount" class="font-weight-bold">Qty.</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="far fa-building"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control", placeholder = "Package Amount", @readonly = "readonly" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="PackageAmount" class="font-weight-bold">Pkg Amt</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="far fa-building"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.PackageAmount, new { @class = "form-control", placeholder = "Package Amount", @readonly = "readonly" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="PackageDiscount" class="font-weight-bold">Pkg Discount</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="far fa-building"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.PackageDiscount, new { @class = "form-control", placeholder = "Package Discount" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="AmountAfterDiscount" class="font-weight-bold">Final Amt</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="far fa-building"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.AmountAfterDiscount, new { @class = "form-control", placeholder = "Amount After Discount", @readonly = "readonly" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="alert alert-success">
+                        <div id="PkgDescription"></div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <center>
+                            <a herf="Javascript:;" onclick="AddPackageToTable();" class="btn btn-info text-white">Add Package to Invoice</a>
+                        </center>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <table id="tblCustomerPackage" class="table table-bordered" width="100%">
+                        <tr>
+                            <th>Id</th>
+                            <th>Package Name</th>
+                            <th>Package Amount</th>
+                            <th>Quantity</th>
+                            <th>Discount</th>
+                            <th>Total Amount</th>
+                            <th></th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="CompanyName" class="font-weight-bold">Remark</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="far fa-building"></i></div>
+                            </div>
+                            @Html.TextAreaFor(m => m.Remark, new { @class = "form-control", placeholder = "Remark", maxlength = "200" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <button class="btn btn-info m-b-20 btn-block text-uppercase waves-effect waves-light" type="submit">
+                            <i class="fas fa-plus-square"></i> SAVE INVOICE
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#PackageDiscount").blur(function () {
+            var discount = $("#PackageDiscount").val();
+            var amount = $("#PackageAmount").val();
+            var maxDiscount = $("#MaxDiscount").val();
+            var quantity = $("#Quantity").val();
+            var amt = (discount - (maxDiscount * quantity));
+            //alert(amt);
+            if (amt > 0) {
+                alert("Discount exceeding maximum limit");
+                $("#PackageDiscount").val("");
+            } else {
+                var amt = ((amount * quantity) - discount);
+                $("#AmountAfterDiscount").val(amt);
+            }
+        });
+
+        $("#PackageId").change(function () {
+            var pkgId = $("#PackageId").val();
+            showPackagePrice(pkgId);
+        });
+
+        $("#CustomerId").change(function () {
+            var custId = $("#CustomerId").val();
+            $("#dvHotels").html("");
+            ShowAllHotels(custId);
+            GetSalesmanId(custId);
+            //var uid = $("#UserId").val();
+            //debugger;
+            //GetZoneList(uid);
+        });
+
+    });
+
+    function HotelCheck(chk) {
+        // debugger;
+
+        var chkVal = document.getElementById(chk).value;
+        var val = document.getElementById(chk).checked;
+
+        if (val == true) {
+            AddHotelId(chkVal);
+            var txt = $("#Quantity").val();
+            txt++;
+            $("#Quantity").val(txt);
+        } else {
+            RemoveHotelId(chkVal);
+            var qty = $("#Quantity").val();
+            qty--;
+            $("#Quantity").val(qty);
+        }
+
+    }
+    function ShowAllHotels(custId) {
+        $.ajax({
+            type: "Get",
+            url: "../dinvoice/GetHotelList/" + custId,
+            success: function (data) {
+                // debugger;
+                var objData = JSON.stringify(data);
+                var lstData = JSON.parse(objData);
+                var strOption = "";
+                for (var i = 0; i < lstData.length; i++) {
+                    strOption += "<div class=\"col-md-3\">";
+                    strOption += "<input type=\"checkbox\" id='chk" + lstData[i].id + "' class=\"custom-checkbox\" value='" + lstData[i].id + "' onclick='HotelCheck(this.id);' />";
+                    strOption += "<label>&nbsp;&nbsp; " + lstData[i].hotelName + "</label>";
+                    strOption += "</div>";
+                }
+                $("#dvHotels").append(strOption);
+            },
+            error: function (err) {
+                alert(err);
+            }
+        });
+    }
+    function GetSalesmanId(custId) {
+        $.ajax({
+            type: "Get",
+            url: "../dinvoice/GetCustomerDetails/" + custId,
+            success: function (data) {
+                // debugger;
+                var objData = JSON.stringify(data);
+                var lstData = JSON.parse(objData);
+                //alert(lstData.UserId);
+                $("#UserId").val(lstData.UserId);
+                // GetZoneList(lstData.UserId);
+            },
+            error: function (err) {
+                alert(err);
+            }
+        });
+    }
+    function GetZoneList(uid) {
+        // debugger;
+        $.ajax({
+            type: "Get",
+            url: "../dinvoice/GetDealerZoneList/" + uid,
+            success: function (data) {
+                // debugger;
+                $("#ZoneId").html("");
+                var objData = JSON.stringify(data);
+                var lstData = JSON.parse(objData);
+                var strOption = "<option value=''>Select Zone</";
+                for (var i = 0; i < lstData.length; i++) {
+                    strOption += "<option  value='" + lstData[i].id + "'>" + lstData[i].zoneName + "</option>";
+                }
+                $("#ZoneId").append(strOption);
+            },
+            error: function (err) {
+                alert(err);
+            }
+        });
+    }
+    function RemoveHotelId(txt) {
+        var id = $("#HotelId").val();
+        var zone = id.split(',');
+        if (zone.length > 0) {
+            for (i = 0; i < zone.length; i++) {
+                if (zone[i] === txt) {
+                    zone.splice(i, 1);
+                }
+            }
+        }
+        $("#HotelId").val(zone.join(','));
+    }
+
+    function AddHotelId(txt) {
+        var zid = $("#HotelId").val();
+        if (zid !== "") {
+            var zone = zid.split(',');
+            if (zone.length > 0) {
+                var flag = 0;
+                for (i = 0; i < zone.length; i++) {
+                    if (zone[i] === txt) {
+                        flag = 1;
+                    }
+                }
+                if (flag == 0) {
+                    zid = zid + ',' + txt;
+                }
+                $("#HotelId").val(zid);
+            }
+        } else {
+            $("#HotelId").val(txt);
+        }
+    }
+
+    function showPackagePrice(pkgId) {
+        $.ajax({
+            type: "Get",
+            url: "../dinvoice/GetPackageDetails/" + pkgId,
+            success: function (data) {
+                // debugger;
+                var objData = JSON.stringify(data);
+                var lstData = JSON.parse(objData);
+                $("#PackageAmount").val(lstData.PackageAmount);
+                $("#MaxDiscount").val(lstData.MaxDiscount);
+                $("#PackageName").val(lstData.PackageName);
+                $("#PkgDescription").html(lstData.PackageDescription);
+            },
+            error: function (err) {
+                alert(err);
+            }
+        });
+    }
+
+    function AddPackageToTable() {
+        if (checkEmpty()) {
+            alert("Please enter package details");
+            return;
+        }
+
+        var PkgId = $("#PackageId").val();
+        var Qty = $("#Quantity").val();
+        var PkgName = $("#PackageName").val();
+        var PkgAmount = $("#PackageAmount").val();
+        var PkgDiscount = $("#PackageDiscount").val();
+        var PkgFinalAmount = $("#AmountAfterDiscount").val();
+
+        var hdnStr = PkgId + "~" + PkgName + "~" + PkgAmount + "~" + Qty + "~" + PkgDiscount + "~" + PkgFinalAmount;
+
+
+        var strData = "";
+        strData += "<tr id='prow" + PkgId + "'>";
+        strData += "<td id='PkgId" + PkgId + "'>" + PkgId + "</td>";
+        strData += "<td id='PkgName" + PkgId + "'>" + PkgName + "</td>";
+        strData += "<td id='PkgAmount" + PkgId + "'>" + PkgAmount + "</td>";
+        strData += "<td id='Qty" + PkgId + "'>" + Qty + "</td>";
+        strData += "<td id='PkgDiscount" + PkgId + "'>" + PkgDiscount + "</td>";
+        strData += "<td id='PkgFinalAmount" + PkgId + "'>" + PkgFinalAmount + "</td>";
+        strData += "<td><a href=\"Javascript:;\" onclick=\"deletePackage('" + PkgId + "');\"><i class=\"far fa-trash-alt\"></i></a></td></tr>";
+
+        var rowCount = $('#tblCustomerPackage tr').length;
+        $('#tblCustomerPackage').append(strData);
+
+        var strPersons = "";
+        if (rowCount > 1) {
+            strPersons = $("#CustomerPackage").val();
+            strPersons += "|" + hdnStr;
+        }
+        else {
+            strPersons = hdnStr;
+        }
+        $("#CustomerPackage").val(strPersons);
+        EmptyPackage();
+    }
+
+    function RemovePackage(id) {
+        var package = $("#CustomerPackage").val();
+        if (package.length == 0) {
+            alert("There is no item to be deleted.");
+            return;
+        }
+        var n = package.toString().indexOf("|", 0);
+        if (n == -1) {
+            var strPackage = package.split('~');
+            if (strPackage[0] == id) {
+                $("#CustomerPackage").val("");
+            }
+        }
+        else {
+            var strPackageList = package.split('|');
+            var strTemp = "";
+            for (i = 0; i < strPackageList.length; i++) {
+                var strPackage = strPackageList[i].split('~');
+                if (strPackage[0] == id) {
+                    strPackageList.splice(i, 1);
+                }
+            }
+            var remainingVal = strPackageList.join('|');
+            $("#CustomerPackage").val(remainingVal);
+        }
+    }
+
+    function EmptyPackage() {
+        $("#PackageId").val(0);
+        $("#PackageName").val("");
+        $("#PackageAmount").val("");
+        $("#PackageDiscount").val("");
+        $("#AmountAfterDiscount").val("");
+        $("#PkgDescription").html("");
+    }
+
+    function deletePackage(no) {
+        //alert(no);
+        document.getElementById("prow" + no + "").outerHTML = "";
+        RemovePackage(no);
+    }
+
+    function checkEmpty() {
+        var flag = false;
+        if ($("#PackageId").val() === "" && $("#PackageName").val() === "" && $("#PackageAmount").val() === "") {
+            flag = true;
+        }
+        return flag;
+    }
+</script>

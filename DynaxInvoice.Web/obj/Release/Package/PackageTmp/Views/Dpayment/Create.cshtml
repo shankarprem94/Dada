@@ -1,0 +1,135 @@
+﻿@model DynaxInvoice.BO.DynaxPayment
+@{
+    ViewBag.Title = "Dynax Solutions Pvt. Ltd.";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="homecontainer">
+    <h3>Welcome to Booking Master</h3>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        @{
+            if (ViewBag.Status != null)
+            {
+                if (ViewBag.Status > 0)
+                {
+                <div class="alert alert-success">
+                    Payment added successfully.
+                </div>
+                }
+                else if (ViewBag.Status == 0)
+                {
+                    <div class="alert alert-danger">
+                        Something went wrong !! Please try after sometime.
+                    </div>
+                }
+            }
+        }
+    </div>
+    <div class="login2 bg-light">
+        <center>
+            <h3><i class="fas fa-globe"></i> Add Payment </h3>
+        </center>
+        <hr />
+        @using (Html.BeginForm("Create", "dinvoice", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="CompanyName" class="font-weight-bold">Invoice</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-globe"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.InvoiceId, new { @class = "form-control", placeholder = "InvoiceId", required = "required" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="CompanyName" class="font-weight-bold">Payment Mode</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="far fa-building"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.PaymentMode, new { @class = "form-control", placeholder = "Payment Mode", required = "required" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="ZoneId" class="font-weight-bold">Check Number</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-globe"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.CheckNumber, new { @class = "form-control", placeholder = "Check Number", required = "required" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="CompanyName" class="font-weight-bold">Check Date</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="far fa-building"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.CheckDate, new { @class = "form-control", placeholder = "Check Date", required = "required" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="CompanyName" class="font-weight-bold">Bank Name</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="far fa-building"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", placeholder = "Bank Name", required = "required" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="CompanyName" class="font-weight-bold">Paid Amount</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="far fa-building"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.PaidAmount, new { @class = "form-control", placeholder = "Paid Amount", required = "required" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="CompanyName" class="font-weight-bold">Payment Date</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="far fa-building"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.PaymentDate, new { @class = "form-control", placeholder = "Payment Date", required = "required" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="CompanyName" class="font-weight-bold">Transaction Id</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="far fa-building"></i></div>
+                            </div>
+                            @Html.TextBoxFor(m => m.TransactionId, new { @class = "form-control", placeholder = "Transaction Id", required = "required" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <button class="btn btn-info m-b-20 btn-block text-uppercase waves-effect waves-light" type="submit">
+                            <i class="fas fa-plus-square"></i> SAVE PAYMENT
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

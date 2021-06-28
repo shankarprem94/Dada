@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A38FE666-D2AB-4FD0-AC14-272405D85D3C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DynaxInvoice.DL</RootNamespace>
+    <AssemblyName>DynaxInvoice.DL</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DbCustomer.cs" />
+    <Compile Include="DbCustomerPackage.cs" />
+    <Compile Include="DbDealer.cs" />
+    <Compile Include="DbFacility.cs" />
+    <Compile Include="DbHotel.cs" />
+    <Compile Include="DbInvoice.cs" />
+    <Compile Include="DbPackages.cs" />
+    <Compile Include="DbPayment.cs" />
+    <Compile Include="DbState.cs" />
+    <Compile Include="DbUser.cs" />
+    <Compile Include="DbZone.cs" />
+    <Compile Include="IDbCustomer.cs" />
+    <Compile Include="IDbCustomerPackage.cs" />
+    <Compile Include="IDbDealer.cs" />
+    <Compile Include="IDbFacility.cs" />
+    <Compile Include="IDbInvoice.cs" />
+    <Compile Include="IDbPackages.cs" />
+    <Compile Include="IDbPayment.cs" />
+    <Compile Include="IDbState.cs" />
+    <Compile Include="IDbUser.cs" />
+    <Compile Include="IDbZone.cs" />
+    <Compile Include="IDbHotel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DynaxInvoice.BO\DynaxInvoice.BO.csproj">
+      <Project>{61E8D6DA-A1ED-4F4B-A5EB-72DF67E4A080}</Project>
+      <Name>DynaxInvoice.BO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,67 @@
+﻿@model DynaxInvoice.BO.DynaxZone
+
+@{
+    ViewBag.Title = "Dynax Solutions Pvt. Ltd.";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<div class="homecontainer">
+    <h3>Welcome to Booking Master</h3>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        @{
+            if (ViewBag.Status != null)
+            {
+                if (ViewBag.Status > 0)
+                {
+                    <div class="alert alert-success">
+                        One User added successfully.
+                    </div>
+                }
+                else if (ViewBag.Status == 0)
+                {
+                    <div class="alert alert-danger">
+                        Something went wrong !! Please try after sometime.
+                    </div>
+                }
+            }
+        }
+    </div>
+    <div class="login bg-light">
+        <center>
+            <h3><i class="fas fa-globe"></i> Update Zone</h3>
+        </center>
+        <hr />
+        @using (Html.BeginForm("Edit", "Dzone", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fas fa-user"></i></div>
+                    </div>
+                    @Html.TextBoxFor(m => m.ZoneName, new { @class = "form-control", placeholder = "Zone Name", required = "required" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="StateId" class="font-weight-bold">State</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fas fa-globe"></i></div>
+                    </div>
+                    @Html.DropDownListFor(m => m.StateId, new SelectList(ViewBag.stList, "Id", "StateName", "0"),
+                    "Select Select", new { @class = "form-control", required = "required" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-12">
+                    @Html.CheckBoxFor(m => m.Status, new { @class = "with-font" })
+                    <label for="Status">Active</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-info m-b-20 btn-block text-uppercase waves-effect waves-light" type="submit">
+                    <i class="fas fa-plus-square"></i> UPDATE ZONE
+                </button>
+            </div>
+        }
+    </div>
+</div>
